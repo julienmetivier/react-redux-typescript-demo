@@ -1,5 +1,5 @@
-import ICharacterState from "../character/data/ICharacterState.interface";
+import IPokemonState from "../pokemon/data/IPokemonState.interface";
 
 export default interface IAppState {
-  characterState: ICharacterState;
+  PokemonState: IPokemonState;
 }

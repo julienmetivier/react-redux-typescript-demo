@@ -1,6 +1,6 @@
 This project demonstrates my changes starting from [Create React App](https://github.com/facebook/create-react-app) to get to a more production worthy app.
 
-I also updated the initial app to be based off of an article by [DefinedByChoice](https://twitter.com/DefinedByChoice/) that makes an API call for Star Wars characters and lists the characters. This change introduces a real world API call for populating the store, something closer to a real-world business app.
+I also updated the initial app to be based off of an article by [DefinedByChoice](https://twitter.com/DefinedByChoice/) that makes an API call for Star Wars Pokemons and lists the Pokemons. This change introduces a real world API call for populating the store, something closer to a real-world business app.
 
 
 | Statements | Branches | Functions | Lines |
@@ -24,7 +24,7 @@ I also updated the initial app to be based off of an article by [DefinedByChoice
 ### Testing
 - Added [airbnb's Enzyme](https://github.com/airbnb/enzyme) for component testing
 - Added test coverage (`$ yarn test:coverage`) using the [Facebook docs](https://facebook.github.io/create-react-app/docs/running-tests)
-- Added test fixture for returned characters inside getCharactersMock.ts
+- Added test fixture for returned Pokemons inside getPokemonsMock.ts
 - I tried both container testing approaches here, and preferred the one that doesn't require connect. [here](https://hackernoon.com/unit-testing-redux-connected-components-692fa3c4441c)
 
 ## Available Scripts

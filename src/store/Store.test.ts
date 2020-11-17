@@ -4,12 +4,12 @@ import moxios from 'moxios';
 // App imports
 import createSagaMiddleware from 'redux-saga';
 import {
-  getCharactersStartActionCreator,
-  getCharactersSuccessActionCreator,
-  getCharactersFailureActionCreator,
-} from '../character/actions/CharacterActionCreators';
-import GetCharactersMock from '../character/data/GetCharactersMock';
-import { charactersSaga } from '../character/sagas/Character';
+  getPokemonsStartActionCreator,
+  getPokemonsSuccessActionCreator,
+  getPokemonsFailureActionCreator,
+} from '../pokemon/actions/PokemonActionCreators';
+import GetPokemonsMock from '../pokemon/data/GetPokemonsMock';
+import { PokemonsSaga } from '../pokemon/sagas/Pokemon';
 
 // Configure the mockStore function
 // Note: if this begins to be used in several places, make a helper
@@ -17,30 +17,30 @@ const sagaMiddleware = createSagaMiddleware();
 const mockStore = configureMockStore([sagaMiddleware]);
 
 // Tests
-describe('getCharactersStart', () => {
+describe('getPokemonsStart', () => {
   beforeEach(() => { moxios.install(); });
   afterEach(() => { moxios.uninstall(); });
 
-  it('creates GET_CHARACTERS_START, GET_CHARACTERS_SUCCESS after successfuly fetching characters', done => {
+  it('creates GET_PokemonS_START, GET_PokemonS_SUCCESS after successfuly fetching Pokemons', done => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
         status: 200,
-        response: { results: GetCharactersMock },
+        response: { results: GetPokemonsMock },
       });
     });
 
     const expectedActions = [
-      getCharactersStartActionCreator(),
-      getCharactersSuccessActionCreator(GetCharactersMock),
+      getPokemonsStartActionCreator(),
+      getPokemonsSuccessActionCreator(GetPokemonsMock),
     ];
 
     const initialState = {
-      characters: [],
+      Pokemons: [],
       isFetching: false,
     };
     const store = mockStore(initialState);
-    sagaMiddleware.run(charactersSaga);
+    sagaMiddleware.run(PokemonsSaga);
 
     store.subscribe(() => {
       const actions = store.getActions();
@@ -50,10 +50,10 @@ describe('getCharactersStart', () => {
       }
     });
 
-    store.dispatch(getCharactersStartActionCreator());
+    store.dispatch(getPokemonsStartActionCreator());
   });
 
-  it('creates GET_CHARACTERS_START, GET_CHARACTERS_FAILURE after failing to fetch characters', done => {
+  it('creates GET_PokemonS_START, GET_PokemonS_FAILURE after failing to fetch Pokemons', done => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
@@ -63,13 +63,13 @@ describe('getCharactersStart', () => {
     });
 
     const expectedActions = [
-      getCharactersStartActionCreator(),
-      getCharactersFailureActionCreator(),
+      getPokemonsStartActionCreator(),
+      getPokemonsFailureActionCreator(),
     ];
 
-    const initialState = { characters: [] };
+    const initialState = { Pokemons: [] };
     const store = mockStore(initialState);
-    sagaMiddleware.run(charactersSaga);
+    sagaMiddleware.run(PokemonsSaga);
 
     store.subscribe(() => {
       const actions = store.getActions();
@@ -79,6 +79,6 @@ describe('getCharactersStart', () => {
       }
     });
 
-    store.dispatch(getCharactersStartActionCreator());
+    store.dispatch(getPokemonsStartActionCreator());
   });
 });

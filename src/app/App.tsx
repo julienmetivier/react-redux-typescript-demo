@@ -1,8 +1,8 @@
 import * as React from 'react';
 
 // Business domain imports
-import CharacterContainer from '../character/CharacterContainer';
+import PokemonContainer from '../pokemon/PokemonContainer';
 
-const App: React.SFC<{}> = () => <CharacterContainer />;
+const App: React.SFC<{}> = () => <PokemonContainer />;
 
 export default App;

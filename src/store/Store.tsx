@@ -14,15 +14,15 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 // Business domain imports
 import IAppState from './IAppState.interface';
-import CharacterReducer from '../character/reducers/CharacterReducer';
-import { charactersSaga } from '../character/sagas/Character';
+import PokemonReducer from '../pokemon/reducers/PokemonReducer';
+import { PokemonsSaga } from '../pokemon/sagas/Pokemon';
 
 // Saga Middleware
 const sagaMiddleware = createSagaMiddleware();
 
 // Create the root reducer
 const rootReducer = combineReducers<IAppState>({
-  characterState: CharacterReducer,
+  PokemonState: PokemonReducer,
 });
 
 // Create a configure store function of type `IAppState`
@@ -33,7 +33,7 @@ export default function configureStore(): Store<IAppState, any> {
                   composeWithDevTools(applyMiddleware(sagaMiddleware))
                 );
 
-  sagaMiddleware.run(charactersSaga);
+  sagaMiddleware.run(PokemonsSaga);
 
   return store;
 }
