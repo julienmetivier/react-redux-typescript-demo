@@ -3,7 +3,7 @@ import PokemonActionTypes from '../actions/PokemonActionTypes.enum';
 
 import {
   getPokemonsFromApi,
-  searchPokemonsFromApi,
+  searchPokemonFromApi,
 } from '../data/Api';
 
 import {
@@ -11,16 +11,19 @@ import {
   getPokemonsFailureActionCreator
 } from '../actions/PokemonActionCreators';
 
-import {
-  ISearchPokemonsAction
-} from '../actions/IGetPokemonsActions.interface';
+import IPokemon from '../data/IPokemon.interface';
+import { ISearchPokemonsAction } from '../actions/IGetPokemonsActions.interface';
+import { capitalizeWord } from '../../helpers/utils';
 
 
 export function* getPokemonsSaga() : any {
   try {
     const response = yield call(getPokemonsFromApi);
-    const Pokemons = response.data.results;
-    yield put(getPokemonsSuccessActionCreator(Pokemons))
+    const pokemons = response.data.results;
+    pokemons.forEach((pokemon: IPokemon ) => {
+      pokemon.name = capitalizeWord(pokemon.name);
+    });
+    yield put(getPokemonsSuccessActionCreator(pokemons))
   } catch(e) {
     yield put(getPokemonsFailureActionCreator());
   }
@@ -28,9 +31,9 @@ export function* getPokemonsSaga() : any {
 
 export function* searchPokemonsSaga(action: ISearchPokemonsAction) : any {
   try {
-    const response = yield call(searchPokemonsFromApi, action.term);
-    const Pokemons = response.data.results;
-    yield put(getPokemonsSuccessActionCreator(Pokemons))
+    const response = yield call(searchPokemonFromApi, action.term);
+    const pokemon = response.data.results;
+    yield put(getPokemonsSuccessActionCreator(pokemon))
   } catch(e) {
     yield put(getPokemonsFailureActionCreator());
   }

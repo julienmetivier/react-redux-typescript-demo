@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 
 import IPokemon from './data/IPokemon.interface';
 
@@ -7,18 +8,12 @@ interface IProps {
   setPokemon: Function,
 }
 
-const PokemonListItem: React.FunctionComponent<IProps> = ({ Pokemon, setPokemon }: IProps) => {
-  const onClickHandler = (event: React.MouseEvent) => {
-    event.preventDefault();
-    setPokemon(Pokemon);
-  }
-
+const PokemonListItem: React.FunctionComponent<IProps> = ({ Pokemon }: IProps) => {
   return (
     <li
       key={Pokemon.name}
-      className="list-group-item"
-      onClick={onClickHandler}>
-      {Pokemon.name}
+      className="list-group-item">
+        <Link to={`/pokemon/${Pokemon.name.toLowerCase()}`}>{Pokemon.name}</Link>
     </li>
   );
 };

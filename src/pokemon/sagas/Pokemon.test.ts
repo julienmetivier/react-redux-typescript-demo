@@ -13,7 +13,7 @@ import GetPokemonsMock from '../data/GetPokemonsMock';
 
 import {
   getPokemonsFromApi,
-  searchPokemonsFromApi,
+  searchPokemonFromApi,
 } from '../data/Api';
 
 import {
@@ -59,7 +59,7 @@ describe('searchPokemons', () => {
     const response = { data: { results: GetPokemonsMock } };
 
     expect(generator.next().value)
-      .toEqual(call(searchPokemonsFromApi, term));
+      .toEqual(call(searchPokemonFromApi, term));
 
     expect(generator.next(response).value)
       .toEqual(put(getPokemonsSuccessActionCreator(GetPokemonsMock)));
@@ -74,7 +74,7 @@ describe('searchPokemons', () => {
     const response = {};
 
     expect(generator.next().value)
-      .toEqual(call(searchPokemonsFromApi, term));
+      .toEqual(call(searchPokemonFromApi, term));
 
     expect(generator.next(response).value)
       .toEqual(put(getPokemonsFailureActionCreator()));

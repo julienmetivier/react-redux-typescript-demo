@@ -7,15 +7,11 @@ import IPokemon from './data/IPokemon.interface';
 import {
   setPokemonActionCreator,
   getPokemonsStartActionCreator,
-  searchPokemonsActionCreator
 } from './actions/PokemonActionCreators';
 
-import Pokemon from './Pokemon';
 import PokemonList from './PokemonList';
 import PokemonMissing from './PokemonMissing';
-import PokemonSearch from './PokemonSearch';
 import Loader from './Loader';
-import NavigationBar from './NavigationBar';
 
 interface IProps {
   getPokemons: Function,
@@ -30,7 +26,6 @@ interface IProps {
 export const PokemonContainer: React.FunctionComponent<IProps> = ({
   getPokemons,
   setPokemon,
-  searchPokemons,
   Pokemon,
   Pokemons,
   isFetching
@@ -43,10 +38,6 @@ export const PokemonContainer: React.FunctionComponent<IProps> = ({
 
   return (
     <div className="Pokemons-container">
-      <NavigationBar>
-        <PokemonSearch searchPokemons={searchPokemons} />
-      </NavigationBar>
-
       { isFetching
         ? <Loader></Loader>
         : (
@@ -83,7 +74,6 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     getPokemons: () => dispatch(getPokemonsStartActionCreator()),
     setPokemon: (Pokemon: any) => dispatch(setPokemonActionCreator(Pokemon)),
-    searchPokemons: (term: string) => dispatch(searchPokemonsActionCreator(term)),
   }
 }
 

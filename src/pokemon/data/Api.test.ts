@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {
   getPokemonsFromApi,
-  searchPokemonsFromApi,
+  searchPokemonFromApi,
 } from './Api';
 
 // Tests
@@ -21,7 +21,7 @@ describe('getPokemons', () => {
     const searchString = 'Luke';
 
     it('httpClient is called as expected', () => {
-      searchPokemonsFromApi(searchString);
+      searchPokemonFromApi(searchString);
       expect(axios.get).toHaveBeenCalledWith(`https://swapi.co/api/people/?search=${searchString}`);
     });
   });
