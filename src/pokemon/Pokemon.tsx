@@ -33,7 +33,6 @@ class Pokemon extends React.Component<PokemonProps, PokemonState> {
         }
         res.json().then(
           data => {
-            console.log(data);
             let types: string[] = [];
               for (let type of data.types) {
                   let typeCapitalized:string = type.type.name;
